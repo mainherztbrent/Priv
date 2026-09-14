@@ -1,6 +1,7 @@
 --[[
     ANTI-RAGDOLL ULTRA - VERSIÓN CORREGIDA (arrastre suave)
     Botón flotante que SÍ prende/apaga y NO se teletransporta
+    Botón centrado en la pantalla al iniciar
 --]]
 
 local Players = game:GetService("Players")
@@ -253,9 +254,16 @@ local function createGUI()
     local savedX = player:GetAttribute("AntiRagdollBtnX")
     local savedY = player:GetAttribute("AntiRagdollBtnY")
     
-    -- Posición por defecto (centro derecha, pero dentro de la pantalla)
-    local defaultX = 500  -- posición X por defecto
-    local defaultY = 150  -- posición Y por defecto
+    -- Tamaño del botón (debe coincidir con button.Size)
+    local btnSize = 60
+    
+    -- Obtener tamaño de la pantalla de forma segura
+    local viewportX = player:GetMouse().ViewSizeX or 800
+    local viewportY = player:GetMouse().ViewSizeY or 600
+    
+    -- Posición por defecto: CENTRO de la pantalla
+    local defaultX = (viewportX - btnSize) / 2
+    local defaultY = (viewportY - btnSize) / 2
     
     -- Solo usar valores guardados si son números válidos
     if type(savedX) == "number" and type(savedY) == "number" and savedX > 0 and savedY > 0 then
@@ -299,11 +307,11 @@ local function createGUI()
                     local newY = startPos.Y.Offset + delta.Y
                     
                     -- Obtener límites de la pantalla de forma segura
-                    local viewportX = player:GetMouse().ViewSizeX or 800
-                    local viewportY = player:GetMouse().ViewSizeY or 600
+                    local viewX = player:GetMouse().ViewSizeX or 800
+                    local viewY = player:GetMouse().ViewSizeY or 600
                     
-                    local maxX = viewportX - button.AbsoluteSize.X
-                    local maxY = viewportY - button.AbsoluteSize.Y
+                    local maxX = viewX - button.AbsoluteSize.X
+                    local maxY = viewY - button.AbsoluteSize.Y
                     
                     newX = math.clamp(newX, 0, maxX)
                     newY = math.clamp(newY, 0, maxY)
