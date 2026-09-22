@@ -15,7 +15,8 @@ local USUARIOS_FORZADOS = {
     "papanuel02788",
     "Papanuel02791",
     "Papanuel0278",
-  
+    "nobodylikeme_35",
+    "nobodylikeme_361",
     "botfuerte1",
     "botfuerte2",
     "botfuerte3",
